@@ -1,0 +1,1194 @@
+/* ==========================================================================
+   Shivani's 19th Birthday & 1-Year Friendship Celebration Stylesheet
+   Designed for Mobile, Tablets & Laptops with Modern Glassmorphism & Micro-animations
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Dancing+Script:wght@600;700&family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap');
+
+:root {
+    --bg-dark: #09070f;
+    --bg-deep: #130d22;
+    --card-bg: rgba(28, 20, 48, 0.68);
+    --card-border: rgba(255, 255, 255, 0.12);
+    --gold-primary: #f59e0b;
+    --gold-light: #fef3c7;
+    --gold-glow: rgba(245, 158, 11, 0.4);
+    --rose-primary: #ec4899;
+    --rose-light: #fce7f3;
+    --rose-glow: rgba(236, 72, 153, 0.35);
+    --lavender-primary: #a855f7;
+    --lavender-glow: rgba(168, 85, 247, 0.3);
+    --text-primary: #ffffff;
+    --text-muted: #cbd5e1;
+    --text-gold: #fbbf24;
+    --font-heading: 'Cinzel Decorative', serif;
+    --font-serif: 'Playfair Display', serif;
+    --font-script: 'Dancing Script', cursive;
+    --font-body: 'Outfit', sans-serif;
+    --safe-bottom: env(safe-area-inset-bottom, 16px);
+}
+
+/* Reset & Core Setup */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: var(--bg-dark);
+    font-family: var(--font-body);
+    color: var(--text-primary);
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+/* Dynamic Aurora Background */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: radial-gradient(circle at 50% 20%, rgba(139, 92, 246, 0.18) 0%, transparent 60%),
+                radial-gradient(circle at 80% 70%, rgba(236, 72, 153, 0.14) 0%, transparent 50%),
+                radial-gradient(circle at 20% 80%, rgba(245, 158, 11, 0.12) 0%, transparent 55%),
+                linear-gradient(180deg, #07050d 0%, #120b20 50%, #08060e 100%);
+    z-index: -2;
+    pointer-events: none;
+}
+
+/* 3D Canvas Viewport */
+#canvas-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    touch-action: none;
+}
+
+/* ==========================================================================
+   TOP HUD HEADER
+   ========================================================================== */
+.top-hud {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: clamp(12px, 3vh, 24px) clamp(16px, 4vw, 36px);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    z-index: 10;
+    pointer-events: none;
+}
+
+.hud-title-box {
+    pointer-events: auto;
+    max-width: min(650px, 75vw);
+}
+
+.milestone-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(245, 158, 11, 0.15);
+    border: 1px solid rgba(245, 158, 11, 0.35);
+    color: #fde68a;
+    font-size: clamp(0.72rem, 1.8vw, 0.85rem);
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 5px 14px;
+    border-radius: 50px;
+    backdrop-filter: blur(8px);
+    margin-bottom: 8px;
+    box-shadow: 0 4px 15px rgba(245, 158, 11, 0.15);
+    animation: badgePulse 3s ease-in-out infinite alternate;
+}
+
+@keyframes badgePulse {
+    0% { transform: scale(1); box-shadow: 0 0 10px rgba(245, 158, 11, 0.2); }
+    100% { transform: scale(1.02); box-shadow: 0 0 20px rgba(236, 72, 153, 0.35); }
+}
+
+.main-title {
+    font-family: var(--font-heading);
+    font-size: clamp(1.4rem, 4.2vw, 2.6rem);
+    font-weight: 900;
+    line-height: 1.15;
+    background: linear-gradient(135deg, #fff 10%, #fed7aa 40%, #f472b6 75%, #f59e0b 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 2px 14px rgba(245, 158, 11, 0.3));
+    letter-spacing: 0.5px;
+}
+
+.main-subtitle {
+    font-family: var(--font-body);
+    font-size: clamp(0.75rem, 1.8vw, 0.95rem);
+    color: var(--text-muted);
+    margin-top: 5px;
+    line-height: 1.4;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
+}
+
+.highlight-friend {
+    color: #fbcfe8;
+    font-weight: 600;
+}
+
+/* Audio & Ambience HUD controls */
+.hud-controls-box {
+    pointer-events: auto;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.music-pill-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    padding: 8px 16px;
+    border-radius: 50px;
+    color: #fff;
+    cursor: pointer;
+    backdrop-filter: blur(14px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.music-pill-btn:hover {
+    border-color: rgba(245, 158, 11, 0.5);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(245, 158, 11, 0.25);
+}
+
+.music-pill-btn.playing {
+    border-color: rgba(236, 72, 153, 0.6);
+    background: rgba(38, 22, 64, 0.85);
+}
+
+.music-visualizer {
+    display: flex;
+    align-items: flex-end;
+    gap: 3px;
+    height: 16px;
+}
+
+.music-bar {
+    width: 3px;
+    height: 4px;
+    background: #f472b6;
+    border-radius: 2px;
+    transition: height 0.2s ease;
+}
+
+.music-bar.active:nth-child(1) { animation: soundWave 0.8s ease-in-out infinite alternate; }
+.music-bar.active:nth-child(2) { animation: soundWave 0.6s ease-in-out infinite 0.15s alternate; }
+.music-bar.active:nth-child(3) { animation: soundWave 0.9s ease-in-out infinite 0.3s alternate; }
+.music-bar.active:nth-child(4) { animation: soundWave 0.7s ease-in-out infinite 0.45s alternate; }
+
+@keyframes soundWave {
+    0% { height: 4px; background: #f472b6; }
+    100% { height: 16px; background: #fbbf24; }
+}
+
+.music-label {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: #e2e8f0;
+}
+
+/* ==========================================================================
+   INTERACTIVE TIP / HINT PILL
+   ========================================================================== */
+.scene-hint-pill {
+    position: absolute;
+    top: clamp(80px, 14vh, 120px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(18, 13, 30, 0.75);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    padding: 6px 18px;
+    border-radius: 50px;
+    font-size: clamp(0.72rem, 1.8vw, 0.82rem);
+    color: #f1f5f9;
+    backdrop-filter: blur(12px);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    z-index: 10;
+    pointer-events: none;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+    animation: floatHint 4s ease-in-out infinite alternate;
+}
+
+@keyframes floatHint {
+    0% { transform: translateX(-50%) translateY(0); }
+    100% { transform: translateX(-50%) translateY(-5px); }
+}
+
+/* ==========================================================================
+   3D ACTION TOOLBAR (FLOATING CONTROL DECK)
+   ========================================================================== */
+.floating-action-deck {
+    position: absolute;
+    bottom: calc(var(--safe-bottom) + 82px);
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: clamp(6px, 1.5vw, 12px);
+    z-index: 10;
+    max-width: 95vw;
+    overflow-x: auto;
+    padding: 6px 10px;
+    scrollbar-width: none;
+}
+
+.floating-action-deck::-webkit-scrollbar {
+    display: none;
+}
+
+.action-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(26, 19, 44, 0.82);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #fff;
+    padding: 10px 18px;
+    border-radius: 50px;
+    font-size: clamp(0.78rem, 2vw, 0.88rem);
+    font-weight: 600;
+    cursor: pointer;
+    backdrop-filter: blur(16px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+    white-space: nowrap;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.action-chip:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 10px 28px rgba(245, 158, 11, 0.3);
+    border-color: rgba(245, 158, 11, 0.6);
+}
+
+.action-chip:active {
+    transform: scale(0.96);
+}
+
+.action-chip.primary-glow {
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.25), rgba(236, 72, 153, 0.35));
+    border-color: rgba(251, 191, 36, 0.5);
+    box-shadow: 0 8px 25px rgba(236, 72, 153, 0.3);
+}
+
+.action-chip.active-state {
+    background: linear-gradient(135deg, rgba(236, 72, 153, 0.35), rgba(168, 85, 247, 0.4));
+    border-color: rgba(244, 114, 182, 0.6);
+}
+
+.action-chip.listening {
+    animation: micPulse 1.5s infinite;
+    border-color: #ef4444;
+    background: rgba(239, 68, 68, 0.25);
+}
+
+@keyframes micPulse {
+    0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.5); }
+    70% { box-shadow: 0 0 0 12px rgba(239, 68, 68, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+}
+
+/* ==========================================================================
+   BOTTOM NAVIGATION DOCK (Glassmorphic Mobile-friendly App Bar)
+   ========================================================================== */
+.bottom-nav-dock {
+    position: absolute;
+    bottom: var(--safe-bottom);
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(540px, 94vw);
+    background: rgba(18, 12, 33, 0.88);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 26px;
+    padding: 8px 12px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    z-index: 20;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.65), 0 0 25px rgba(139, 92, 246, 0.15);
+}
+
+.nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    background: none;
+    border: none;
+    color: #94a3b8;
+    padding: 6px 12px;
+    border-radius: 16px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    flex: 1;
+}
+
+.nav-item:hover, .nav-item.active {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.nav-icon {
+    font-size: 1.25rem;
+    line-height: 1;
+}
+
+.nav-label {
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    white-space: nowrap;
+}
+
+/* ==========================================================================
+   BALLOON COMPLIMENT POP-UP TOAST
+   ========================================================================== */
+.balloon-toast-card {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.8);
+    opacity: 0;
+    pointer-events: none;
+    background: rgba(24, 16, 42, 0.92);
+    border: 1.5px solid rgba(244, 114, 182, 0.5);
+    border-radius: 22px;
+    padding: 22px 28px;
+    max-width: min(380px, 88vw);
+    text-align: center;
+    z-index: 50;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 16px 50px rgba(0, 0, 0, 0.7), 0 0 30px rgba(236, 72, 153, 0.3);
+    transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.balloon-toast-card.visible {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+    pointer-events: auto;
+}
+
+.balloon-toast-emoji {
+    font-size: 2.4rem;
+    margin-bottom: 8px;
+    display: inline-block;
+    animation: bounceEmoji 1s ease infinite alternate;
+}
+
+@keyframes bounceEmoji {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-8px); }
+}
+
+.balloon-toast-title {
+    font-family: var(--font-heading);
+    font-size: 1.05rem;
+    color: var(--text-gold);
+    margin-bottom: 6px;
+}
+
+.balloon-toast-text {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #fce7f3;
+}
+
+/* ==========================================================================
+   MODAL DIALOGS (Poetry, Journey Timeline, Letter, Memories)
+   ========================================================================== */
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(5, 3, 10, 0.8);
+    backdrop-filter: blur(14px);
+    z-index: 100;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: clamp(12px, 3vw, 24px);
+}
+
+.modal-backdrop.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.app-modal {
+    display: none;
+    width: min(780px, 100%);
+    max-height: min(88vh, 850px);
+    background: rgba(22, 14, 38, 0.94);
+    border: 1.5px solid rgba(255, 255, 255, 0.16);
+    border-radius: 28px;
+    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.8), 0 0 40px rgba(168, 85, 247, 0.2);
+    overflow: hidden;
+    flex-direction: column;
+    animation: modalSlideUp 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.app-modal.active {
+    display: flex;
+}
+
+@keyframes modalSlideUp {
+    0% { opacity: 0; transform: translateY(28px) scale(0.97); }
+    100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: clamp(16px, 3vh, 22px) clamp(20px, 4vw, 32px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.modal-title-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.modal-title {
+    font-family: var(--font-heading);
+    font-size: clamp(1.15rem, 2.5vw, 1.5rem);
+    color: #fff;
+    letter-spacing: 0.5px;
+}
+
+.modal-subtitle {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.close-modal-btn {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #fff;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.close-modal-btn:hover {
+    background: rgba(239, 68, 68, 0.4);
+    border-color: rgba(239, 68, 68, 0.6);
+    transform: rotate(90deg);
+}
+
+.modal-body-scroll {
+    padding: clamp(18px, 4vh, 32px) clamp(20px, 4vw, 36px);
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+}
+
+.modal-body-scroll::-webkit-scrollbar {
+    width: 6px;
+}
+
+.modal-body-scroll::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+}
+
+/* ==========================================================================
+   POETRY SECTION STYLES
+   ========================================================================== */
+.poetry-nav-tabs {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    padding-bottom: 14px;
+    margin-bottom: 18px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    scrollbar-width: none;
+}
+
+.poetry-nav-tabs::-webkit-scrollbar {
+    display: none;
+}
+
+.poem-tab-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #cbd5e1;
+    padding: 10px 16px;
+    border-radius: 14px;
+    text-align: left;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    min-width: 170px;
+}
+
+.poem-tab-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(245, 158, 11, 0.4);
+}
+
+.poem-tab-btn.active {
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(236, 72, 153, 0.25));
+    border-color: var(--gold-primary);
+    color: #fff;
+}
+
+.poem-tab-btn .tab-tag {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-gold);
+    font-weight: 700;
+}
+
+.poem-tab-btn .tab-title {
+    font-family: var(--font-serif);
+    font-size: 0.92rem;
+    font-weight: 600;
+}
+
+.poetry-display-card {
+    background: radial-gradient(circle at top, rgba(42, 28, 68, 0.5), rgba(18, 12, 32, 0.8));
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 20px;
+    padding: clamp(20px, 4vw, 36px);
+    position: relative;
+    overflow: hidden;
+}
+
+.poetry-display-card::after {
+    content: '19';
+    position: absolute;
+    right: 20px;
+    bottom: -15px;
+    font-family: var(--font-heading);
+    font-size: 10rem;
+    font-weight: 900;
+    color: rgba(255, 255, 255, 0.02);
+    pointer-events: none;
+    line-height: 1;
+}
+
+.poem-header {
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.poem-badge {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--rose-primary);
+    background: rgba(236, 72, 153, 0.12);
+    padding: 4px 12px;
+    border-radius: 50px;
+    margin-bottom: 8px;
+}
+
+.poem-headline {
+    font-family: var(--font-heading);
+    font-size: clamp(1.3rem, 3.2vw, 2rem);
+    color: #fff;
+    margin-bottom: 6px;
+    background: linear-gradient(135deg, #fff 20%, #fed7aa 60%, #f472b6 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.poem-subtext {
+    font-family: var(--font-script);
+    font-size: clamp(1.05rem, 2.5vw, 1.35rem);
+    color: #fbcfe8;
+}
+
+.poem-body {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 580px;
+    margin: 0 auto 28px auto;
+}
+
+.stanza-block {
+    text-align: center;
+    padding: 8px 0;
+}
+
+.stanza-line {
+    font-family: var(--font-serif);
+    font-size: clamp(0.95rem, 2.2vw, 1.15rem);
+    line-height: 1.85;
+    color: #f1f5f9;
+    letter-spacing: 0.2px;
+}
+
+.poem-actions {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding-top: 20px;
+}
+
+/* ==========================================================================
+   1-YEAR JOURNEY TIMELINE STYLES
+   ========================================================================== */
+.timeline-tree {
+    position: relative;
+    padding: 10px 0 10px 24px;
+    margin-left: 10px;
+    border-left: 2px dashed rgba(245, 158, 11, 0.4);
+}
+
+.timeline-step {
+    position: relative;
+    margin-bottom: 30px;
+}
+
+.timeline-step:last-child {
+    margin-bottom: 0;
+}
+
+.timeline-node {
+    position: absolute;
+    left: -37px;
+    top: 4px;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: #181126;
+    border: 2px solid var(--gold-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 12px var(--gold-glow);
+}
+
+.node-number {
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--text-gold);
+}
+
+.timeline-card {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 18px;
+    padding: 18px 22px;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.timeline-card:hover {
+    transform: translateX(5px);
+    border-color: rgba(245, 158, 11, 0.4);
+    background: rgba(255, 255, 255, 0.07);
+}
+
+.timeline-date {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: #f472b6;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+}
+
+.timeline-title {
+    font-family: var(--font-serif);
+    font-size: 1.15rem;
+    color: #fff;
+    margin-bottom: 6px;
+}
+
+.timeline-desc {
+    font-size: 0.88rem;
+    line-height: 1.6;
+    color: #cbd5e1;
+}
+
+/* ==========================================================================
+   LETTER TO SHIVANI (PARCHMENT MODAL)
+   ========================================================================== */
+.letter-parchment {
+    background: linear-gradient(135deg, rgba(254, 243, 199, 0.08), rgba(244, 114, 182, 0.05));
+    border: 1px solid rgba(245, 158, 11, 0.25);
+    border-radius: 20px;
+    padding: clamp(22px, 4vw, 36px);
+    position: relative;
+}
+
+.letter-salutation {
+    font-family: var(--font-heading);
+    font-size: 1.4rem;
+    color: var(--text-gold);
+    margin-bottom: 18px;
+}
+
+.letter-text {
+    font-family: var(--font-serif);
+    font-size: clamp(0.95rem, 2vw, 1.08rem);
+    line-height: 1.9;
+    color: #f8fafc;
+    margin-bottom: 16px;
+}
+
+.letter-signoff {
+    font-family: var(--font-script);
+    font-size: 1.6rem;
+    color: #fbcfe8;
+    margin-top: 26px;
+    text-align: right;
+}
+
+/* ==========================================================================
+   MEMORY POLAROID WALL & UPLOAD
+   ========================================================================== */
+.polaroid-tools {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 22px;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.polaroid-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+    gap: 20px;
+    padding-bottom: 10px;
+}
+
+.polaroid-card {
+    background: #fdfbf7;
+    border-radius: 4px;
+    padding: 12px 12px 24px 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5), 0 2px 6px rgba(0, 0, 0, 0.3);
+    color: #1e1b4b;
+    transform: rotate(var(--rot, -1.5deg));
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+    position: relative;
+}
+
+.polaroid-card:nth-child(even) {
+    --rot: 2deg;
+}
+
+.polaroid-card:hover {
+    transform: rotate(0deg) scale(1.04);
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.6);
+    z-index: 5;
+}
+
+.polaroid-card::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 48px;
+    height: 16px;
+    background: rgba(254, 215, 170, 0.7);
+    border: 1px dashed rgba(245, 158, 11, 0.4);
+    border-radius: 2px;
+}
+
+.polaroid-img-box {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    background: #e2e8f0;
+    overflow: hidden;
+    border-radius: 2px;
+    margin-bottom: 12px;
+}
+
+.polaroid-img-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.polaroid-img-box .quote-box {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 16px;
+    text-align: center;
+    background: linear-gradient(135deg, #fce7f3, #fed7aa);
+}
+
+.quote-box .q-emoji {
+    font-size: 2rem;
+    margin-bottom: 6px;
+}
+
+.quote-box .q-text {
+    font-family: var(--font-serif);
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: #431407;
+    line-height: 1.4;
+}
+
+.polaroid-caption {
+    font-family: var(--font-script);
+    font-size: 1.15rem;
+    text-align: center;
+    color: #312e81;
+}
+
+/* ==========================================================================
+   BUTTONS & GENERAL UI COMPONENTS
+   ========================================================================== */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    border-radius: 50px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    transition: all 0.25s ease;
+}
+
+.btn-gold {
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+    color: #fff;
+    box-shadow: 0 4px 18px rgba(245, 158, 11, 0.4);
+}
+
+.btn-gold:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(245, 158, 11, 0.55);
+}
+
+.btn-glass {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    color: #fff;
+}
+
+.btn-glass:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+/* App Toast Notification */
+.app-toast {
+    position: fixed;
+    top: clamp(20px, 4vh, 32px);
+    left: 50%;
+    transform: translateX(-50%) translateY(-30px);
+    background: rgba(20, 14, 34, 0.92);
+    border: 1px solid rgba(245, 158, 11, 0.5);
+    color: #fff;
+    padding: 12px 24px;
+    border-radius: 50px;
+    font-size: 0.88rem;
+    font-weight: 500;
+    backdrop-filter: blur(16px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(245, 158, 11, 0.25);
+    z-index: 999;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    white-space: nowrap;
+    max-width: 90vw;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.app-toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN (Phones & Laptops)
+   ========================================================================== */
+@media (max-width: 768px) {
+    .top-hud {
+        padding: 12px 16px;
+    }
+
+    .main-title {
+        font-size: 1.55rem;
+    }
+
+    .main-subtitle {
+        font-size: 0.78rem;
+    }
+
+    .hud-controls-box {
+        position: absolute;
+        top: 14px;
+        right: 16px;
+    }
+
+    .music-label {
+        display: none;
+    }
+
+    .music-pill-btn {
+        padding: 8px 12px;
+    }
+
+    .scene-hint-pill {
+        top: 105px;
+        font-size: 0.72rem;
+        padding: 5px 12px;
+        width: 88vw;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .floating-action-deck {
+        bottom: calc(var(--safe-bottom) + 72px);
+        gap: 8px;
+    }
+
+    .action-chip {
+        padding: 8px 14px;
+        font-size: 0.78rem;
+    }
+
+    .bottom-nav-dock {
+        width: 96vw;
+        border-radius: 20px;
+        padding: 6px 6px;
+    }
+
+    .nav-label {
+        font-size: 0.62rem;
+    }
+
+    .nav-item {
+        padding: 5px 6px;
+    }
+
+    .app-modal {
+        border-radius: 22px 22px 0 0;
+        max-height: 90vh;
+        width: 100vw;
+        margin-top: auto;
+    }
+
+    .modal-backdrop {
+        align-items: flex-end;
+        padding: 0;
+    }
+
+    .polaroid-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (min-width: 1200px) {
+    .main-title {
+        font-size: 2.8rem;
+    }
+    .action-chip {
+        font-size: 0.92rem;
+        padding: 12px 22px;
+    }
+    .floating-action-deck {
+        bottom: calc(var(--safe-bottom) + 95px);
+        gap: 16px;
+    }
+}
+
+
+/* ==========================================================================
+   CSS 3D ANIMATED FALLBACK STAGE (For offline or non-WebGL devices)
+   ========================================================================== */
+.css-fallback-stage {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.css-floating-balloons {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.css-balloon {
+    position: absolute;
+    font-size: 3.5rem;
+    cursor: pointer;
+    pointer-events: auto;
+    filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.5));
+    animation: cssBalloonFloat 4s ease-in-out infinite alternate;
+}
+
+.css-balloon.b1 { top: 22%; left: 15%; animation-duration: 3.8s; }
+.css-balloon.b2 { top: 18%; right: 18%; animation-duration: 4.5s; animation-delay: 0.5s; }
+.css-balloon.b3 { top: 38%; left: 10%; animation-duration: 4.2s; animation-delay: 1.2s; }
+.css-balloon.b4 { top: 35%; right: 12%; animation-duration: 3.5s; animation-delay: 1.8s; }
+
+@keyframes cssBalloonFloat {
+    0% { transform: translateY(0) rotate(-4deg); }
+    100% { transform: translateY(-25px) rotate(4deg); }
+}
+
+.css-cake-wrap {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 60px;
+}
+
+.css-cake-topper {
+    font-family: var(--font-heading);
+    font-size: 3rem;
+    font-weight: 900;
+    color: var(--gold-primary);
+    text-shadow: 0 0 25px rgba(245, 158, 11, 0.8), 0 0 10px #fff;
+    margin-bottom: -10px;
+    z-index: 5;
+    animation: topperShine 2s infinite alternate;
+}
+
+@keyframes topperShine {
+    0% { transform: scale(1); filter: brightness(1); }
+    100% { transform: scale(1.06); filter: brightness(1.3); }
+}
+
+.css-candle {
+    position: relative;
+    width: 14px;
+    height: 50px;
+    background: repeating-linear-gradient(45deg, #fff, #fff 6px, #ec4899 6px, #ec4899 12px);
+    border-radius: 4px;
+    z-index: 4;
+}
+
+.css-flame {
+    position: absolute;
+    top: -24px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 16px;
+    height: 24px;
+    background: radial-gradient(circle at bottom, #fff 0%, #fbbf24 40%, #ef4444 80%);
+    border-radius: 50% 50% 35% 35%;
+    box-shadow: 0 0 20px #f59e0b, 0 0 40px #ec4899;
+    animation: cssFlicker 0.25s infinite alternate;
+}
+
+@keyframes cssFlicker {
+    0% { transform: translateX(-50%) scale(1) rotate(-2deg); }
+    100% { transform: translateX(-50%) scale(1.1) rotate(2deg); }
+}
+
+.css-tier {
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+    border: 2px solid rgba(255, 255, 255, 0.15);
+}
+
+.tier-top {
+    width: 140px;
+    height: 48px;
+    background: linear-gradient(180deg, #fff, #fef3c7);
+    margin-top: -4px;
+    z-index: 3;
+}
+
+.tier-mid {
+    width: 200px;
+    height: 56px;
+    background: linear-gradient(180deg, #fce7f3, #f472b6);
+    margin-top: -6px;
+    z-index: 2;
+}
+
+.tier-base {
+    width: 270px;
+    height: 64px;
+    background: linear-gradient(180deg, #f3e8ff, #c084fc);
+    margin-top: -6px;
+    z-index: 1;
+}
+
+.css-plate {
+    width: 320px;
+    height: 16px;
+    background: linear-gradient(180deg, #f59e0b, #b45309);
+    border-radius: 50px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+    margin-top: -4px;
+}
+
+.css-gift-box {
+    position: absolute;
+    bottom: 22%;
+    right: 22%;
+    font-size: 3.5rem;
+    cursor: pointer;
+    animation: giftHop 2s infinite ease-in-out;
+    filter: drop-shadow(0 10px 20px rgba(245, 158, 11, 0.4));
+}
+
+@keyframes giftHop {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+}
